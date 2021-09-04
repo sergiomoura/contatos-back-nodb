@@ -22,12 +22,12 @@ module.exports = {
         if(contatos.length == 0) {
             req.contato.id = 1    
         } else {
-            req.contato.id = contato[contatos.length - 1].id + 1;
+            req.contato.id = contatos[contatos.length - 1].id + 1;
         }
         
         contatos.push(req.contato)
         fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
-        res.status(201).json()
+        res.status(201).json({idCreated:req.contato.id});
     },
     update: (req, res) => {
         const filePath = path.resolve(__dirname,`../database/contatos_${req.usuario.id}.json`);
@@ -48,5 +48,25 @@ module.exports = {
 
         fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
         res.status(201).json()
+    },
+    destroy: (req,res) => {
+        const filePath = path.resolve(__dirname,`../database/contatos_${req.usuario.id}.json`);
+        
+        let contatos;
+        if(fs.existsSync(filePath)) {
+            contatos = JSON.parse(fs.readFileSync(filePath));
+        } else {
+            return res.status(404).json({err:"Contato inexistente"});
+        }
+
+        let pos = contatos.findIndex(c => c.id == req.params.id);
+        if(pos == -1){
+            return res.status(404).json({err:"Contato inexistente"});
+        }
+        
+        contatos.splice(pos,1);
+
+        fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
+        res.status(200).json()
     }
 }
