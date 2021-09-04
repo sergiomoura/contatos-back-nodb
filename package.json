@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --ignore ./database/**"
+    "start": "node ./bin/www",
+    "devmode":  "nodemon ./bin/www --ignore ./database/**"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
