@@ -1,3 +1,7 @@
+# Dados
+database/*
+database/usuarios.json
+
 # Logs
 logs
 *.log
