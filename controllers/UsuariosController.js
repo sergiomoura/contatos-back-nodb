@@ -5,10 +5,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const arquivo = '../database/usuarios.json';
-const usuarios = require(arquivo);
 
 module.exports = {
     registrar: (req, res) => {
+        let usuarios = [];
+        if(fs.existsSync(path.resolve(__dirname,arquivo))){
+            usuarios = require(arquivo);
+        }
         
         let {nome, email, senha} = req.body;
         let id = 1;
@@ -27,6 +30,11 @@ module.exports = {
         
         let {email, senha} = req.body;
         
+        let usuarios = [];
+        if(fs.existsSync(path.resolve(__dirname,arquivo))){
+            usuarios = require(arquivo);
+        }
+
         let usuario = usuarios.find(
             u => {
                 console.log(u);
