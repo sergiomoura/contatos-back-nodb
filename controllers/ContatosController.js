@@ -27,6 +27,26 @@ module.exports = {
         
         contatos.push(req.contato)
         fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
-        res.status(203).json()
+        res.status(201).json()
+    },
+    update: (req, res) => {
+        const filePath = path.resolve(__dirname,`../database/contatos_${req.usuario.id}.json`);
+        
+        let contatos;
+        if(fs.existsSync(filePath)) {
+            contatos = JSON.parse(fs.readFileSync(filePath));
+        } else {
+            return res.status(404).json({err:"Contato inexistente"});
+        }
+
+        let pos = contatos.findIndex(c => c.id == req.params.id);
+        if(pos == -1){
+            return res.status(404).json({err:"Contato inexistente"});
+        }
+        
+        contatos[pos] = req.contato;
+
+        fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
+        res.status(201).json()
     }
 }
