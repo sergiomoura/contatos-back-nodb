@@ -19,6 +19,11 @@ module.exports = {
             id = usuarios[usuarios.length - 1] + 1;
         }
 
+        // Verificando se já existe um usuário com o email cadastrado
+        if(usuarios.find( u=>u.email == email)){
+            return res.status(403).json({err:"Um usuário com este e-mail já foi cadastrado."});
+        }
+
         usuarios.push(
             {id,nome,email,senha:bcrypt.hashSync(senha,10)}
         )
