@@ -1,5 +1,5 @@
 # Dados
-database/*
+database/contatos_*
 database/usuarios.json
 
 # Logs
