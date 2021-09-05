@@ -28,8 +28,11 @@ module.exports = {
             {id,nome,email,senha:bcrypt.hashSync(senha,10)}
         )
         fs.writeFileSync(path.resolve(__dirname,arquivo), JSON.stringify(usuarios,null,1));
+        
+        // Criando token a ser retornado
+        let token = jwt.sign({id,nome,email}, process.env.JWT_SECRET)
 
-        res.status(200).json({msg:"ok"});
+        res.status(200).json({msg:"ok", token});
     },
     login: (req,res) => {
         
