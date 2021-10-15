@@ -1,0 +1,10 @@
+@host=http://contatos-nodb.herokuapp.com/
+
+POST {{host}}registrar HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Teste",
+    "email": "teste1@teste.com",
+    "senha": "teste"
+}
