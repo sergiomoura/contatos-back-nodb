@@ -16,7 +16,7 @@ module.exports = {
         let {nome, email, senha} = req.body;
         let id = 1;
         if(usuarios.length > 0){
-            id = usuarios[usuarios.length - 1] + 1;
+            id = usuarios[usuarios.length - 1].id + 1;
         }
 
         // Verificando se já existe um usuário com o email cadastrado
