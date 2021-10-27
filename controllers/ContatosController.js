@@ -27,7 +27,7 @@ module.exports = {
         
         contatos.push(req.contato)
         fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
-        res.status(201).json({idCreated:req.contato.id});
+        res.status(201).json(req.contato);
     },
     update: (req, res) => {
         const filePath = path.resolve(__dirname,`../database/contatos_${req.usuario.id}.json`);
@@ -47,7 +47,7 @@ module.exports = {
         contatos[pos] = req.contato;
 
         fs.writeFileSync(filePath,JSON.stringify(contatos,null,1));
-        res.status(201).json()
+        res.status(201).json(req.contato)
     },
     destroy: (req,res) => {
         const filePath = path.resolve(__dirname,`../database/contatos_${req.usuario.id}.json`);

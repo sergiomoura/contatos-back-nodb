@@ -6,11 +6,20 @@ content-type: application/json
 
 {
     "nome": "Teste",
-    "email": "teste1@teste.com",
-    "senha": "teste"
+    "email": "teste@teste.com",
+    "senha": "123456"
 }
 
 ###
 GET {{host}}/contatos HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6IlRlc3RlIiwiZW1haWwiOiJ0ZXN0ZTFAdGVzdGUuY29tIiwiaWF0IjoxNjM0OTA4MjAxfQ.0RJSwgqkC2mHshxn7TPMLfL4hycUpYCM5jp8viXvc4A
+
+###
+POST {{host}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "teste@teste.com",
+    "senha": "123456"
+}
